@@ -1,6 +1,6 @@
-# p0wny@shell:~# -- Single-file PHP Shell
-
-p0wny@shell:~# is a very basic, single-file, PHP shell. It can be used to quickly execute commands on a server when pentesting a PHP application. Use it with caution: this script represents a security risk for the server.
+# p0wny@shell:~# -- Laravel PHP Shell
+# Marssilen Laravel 8 Shell
+p0wny@shell:~# is a very basic, Laravel, PHP shell. It can be used to quickly execute commands on a server when pentesting a PHP application. Use it with caution: this script represents a security risk for the server.
 
 **Features:**
 
@@ -15,11 +15,12 @@ p0wny@shell:~# is a very basic, single-file, PHP shell. It can be used to quickl
 ![Screenshot](./screenshot.png)
 
 
-**Demo with Docker:**
-
-        docker build -t p0wny .
-        docker run -it -p 8080:80 -d p0wny
-        # open with your browser http://127.0.0.1:8080/shell.php
+**Demo with Laravel:**
+* rename .eve.example to .env
+		composer install
+		php artisan key:generate
+        php artisan serve
+        # open with your browser http://127.0.0.1:8000/
 
 ## Changelog
 
