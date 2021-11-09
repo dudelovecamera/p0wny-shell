@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ShellController extends Controller
 {
@@ -53,7 +50,7 @@ class ShellController extends Controller
         } elseif (preg_match("/^\s*download\s+[^\s]+\s*(2>&1)?$/", $cmd)) {
             chdir($cwd);
             preg_match("/^\s*download\s+([^\s]+)\s*(2>&1)?$/", $cmd, $match);
-            return featureDownload($match[1]);
+            return $this->featureDownload($match[1]);
         } else {
             chdir($cwd);
             exec($cmd, $stdout);
